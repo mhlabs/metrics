@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhlabs.metrics", "src\mhlabs.metrics.csproj", "{4F1C681B-0640-41B2-81B2-2B3EFA161646}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhlabs.metrics", "mhlabs.metrics\mhlabs.metrics.csproj", "{4F1C681B-0640-41B2-81B2-2B3EFA161646}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhlabs.metrics.tests", "tests\mhlabs.metrics.tests.csproj", "{8C0DB21E-8C9F-4417-B647-731BE7E75CF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhlabs.metrics.tests", "mhlabs.metrics.tests\mhlabs.metrics.tests.csproj", "{8C0DB21E-8C9F-4417-B647-731BE7E75CF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
