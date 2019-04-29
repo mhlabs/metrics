@@ -4,16 +4,15 @@ namespace MhLabs.Metrics
 {
     public class MetricClient
     {
-        public static string Host = "mathem.my-service";
-        public static string Prefix = "mathem.metric";
-        public static Action<string> Renderer = Console.WriteLine;
+        public static string Host;
+        public static string Prefix;
+        public static Action<string> Renderer;
 
-        public MetricClient() {}
-        public MetricClient(string host, string prefix, Action<string> renderer) 
+        public MetricClient(string host = null, string prefix = null, Action<string> renderer = null) 
         {
-            Host = host;
-            Prefix = prefix;
-            Renderer = renderer;
+            Host = host ?? "mathem.my-service";
+            Prefix = prefix ?? "mathem.metric";
+            Renderer = renderer ?? Console.WriteLine;;
         }
 
         public void Gauge(string name, string type, int point, string[] tags = null)
