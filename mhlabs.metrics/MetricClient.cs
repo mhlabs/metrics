@@ -1,45 +1,60 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MhLabs.Metrics
 {
     public class MetricClient
     {
-        public static string Host;
-        public static string Prefix;
-        public static Action<string> Renderer;
+        private readonly string _host;
+        private readonly string _prefix;
+        private readonly string _defaultTags;
+        private readonly Action<string> _output;
 
-        public MetricClient(string host = null, string prefix = null, Action<string> renderer = null) 
+        public MetricClient(string host = "mathem.my-service", string prefix = "mathem.metric", Action<string> output = null, List<string> defaultTags = null) 
         {
-            Host = host ?? "mathem.my-service";
-            Prefix = prefix ?? "mathem.metric";
-            Renderer = renderer ?? Console.WriteLine;;
+            _host = host;
+            _prefix = prefix;
+            _output = output ?? Console.WriteLine;
+
+            var tags = defaultTags ?? new List<string>();
+            tags.Add($"domain:{_host}");
+
+            _defaultTags = ToTagsFormat(tags.Distinct().ToList());
         }
 
-        public void Gauge(string name, string type, int point, string[] tags = null)
+        public void Gauge(string name, int point, List<string> tags = null)
         {
-            Print(MetricType.gauge, name, type, point, tags);
+            Print(MetricType.gauge, name, point, tags);
         }
 
-        public void Timing(string name, string type, int point, string[] tags = null)
+        public void Timing(string name, string type, int point, List<string> tags = null)
         {
-            Print(MetricType.rate, name, type, point, tags);
+            Print(MetricType.rate, name, point, tags);
         }
 
-        public void Increment(string name, string type, int point = 1, string[] tags = null)
+        public void Increment(string name, int point = 1, List<string> tags = null)
         {
-            Print(MetricType.count, name, type, point, tags);
+            Print(MetricType.count, name, point, tags);
         }
 
-        public void Print(MetricType metricType, string name, string type, int point = 1, string[] tags = null)
+        public void Print(MetricType metricType, string name, int point = 1, List<string> tags = null)
         {
-            if (tags == null) 
+            var tagFormat = ToTagsFormat(tags);
+
+            if (string.IsNullOrWhiteSpace(tagFormat)) 
             {
-                Console.WriteLine($"{Prefix}: {Host} {metricType.ToString()} {name} {point}");
+                Console.WriteLine($"{_prefix}: {_host} {metricType.ToString()} {name} {point} {_defaultTags}");
             }
             else 
             {
-                Console.WriteLine($"{Prefix}: {Host} {metricType.ToString()} {name} {point} {string.Join(" ", tags)}");
+                Console.WriteLine($"{_prefix}: {_host} {metricType.ToString()} {name} {point} {_defaultTags} {tagFormat}");
             }
+        }
+
+        private static string ToTagsFormat(List<string> tags)
+        {
+            return tags == null ? string.Empty : string.Join(" ", tags);
         }
     }
 
