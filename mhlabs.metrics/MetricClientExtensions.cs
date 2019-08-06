@@ -15,7 +15,7 @@ namespace mhlabs.metrics.extensions
         public static IServiceCollection AddMetricsClient(this IServiceCollection serviceCollection, 
             string host,
             string prefix = Constants.DefaultPrefix,
-            Action<string> output = null, List<string> defaultTags = null)
+            Action<string> output = null, params string[] defaultTags)
         {
             return serviceCollection.AddSingleton(new MetricClient(host: host, prefix: prefix, output: output, defaultTags: defaultTags));
         }

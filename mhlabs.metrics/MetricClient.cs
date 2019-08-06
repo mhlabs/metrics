@@ -18,58 +18,66 @@ namespace MhLabs.Metrics
         /// <param name="prefix">Add your custom prefix for metrics, e.g 'mathem.metric'</param>
         /// <param name="output">Metric renderer, are using Console.WriteLine as default</param>
         /// <param name="defaultTags">List of default tags that will be included in all logs, e.g 'owner:ecom'</param>
-        public MetricClient(string host, string prefix = Constants.DefaultPrefix, Action<string> output = null, List<string> defaultTags = null) 
+        public MetricClient(string host, string prefix = Constants.DefaultPrefix, Action<string> output = null, params string[] defaultTags) 
         {
             _host = host;
             _prefix = prefix;
             _output = output ?? Console.WriteLine;
 
-            var tags = defaultTags ?? new List<string>();
-            tags.Add($"domain:{_host}");
+            var baseTags = new List<string> {$"domain:{_host}"};
+            baseTags.AddRange(defaultTags ?? new string[0]);
 
-            _defaultTags = ToTagsFormat(tags.Distinct().ToList());
+            _defaultTags = ToTagsFormat(baseTags.Distinct().ToArray());
         }
 
-        public void Gauge(string name, int point, List<string> tags = null)
+        public void Gauge(string name, int point, params string[] tags)
         {
-            Print(MetricType.gauge, name, point, tags);
+            Print(MetricType.Gauge, name, point, tags);
         }
 
-        public void Timing(string name, string type, int point, List<string> tags = null)
+        public void Timing(string name, string type, int point, params string[] tags)
         {
-            Print(MetricType.rate, name, point, tags);
+            Print(MetricType.Rate, name, point, tags);
         }
 
-        public void Increment(string name, int point = 1, List<string> tags = null)
+        public void Increment(string name, int point = 1, params string[] tags)
         {
-            Print(MetricType.count, name, point, tags);
+            Print(MetricType.Count, name, point, tags);
         }
 
-        public void Print(MetricType metricType, string name, int point = 1, List<string> tags = null)
+        public void Print(MetricType metricType, string name, int point = 1, params string[] tags)
         {
             var tagFormat = ToTagsFormat(tags);
+            var type = ToMetricTypeString(metricType);
 
-            if (string.IsNullOrWhiteSpace(tagFormat)) 
-            {
-                Console.WriteLine($"{_prefix}: {_host} {metricType.ToString()} {name} {point} {_defaultTags}");
-            }
-            else 
-            {
-                Console.WriteLine($"{_prefix}: {_host} {metricType.ToString()} {name} {point} {_defaultTags} {tagFormat}");
-            }
+            _output(string.IsNullOrWhiteSpace(tagFormat)
+                ? $"{_prefix}: {_host} {type} {name} {point} {_defaultTags}"
+                : $"{_prefix}: {_host} {type} {name} {point} {_defaultTags} {tagFormat}");
         }
 
-        private static string ToTagsFormat(List<string> tags)
+        private static string ToTagsFormat(string[] tags)
         {
             return tags == null ? string.Empty : string.Join(" ", tags);
+        }
+
+        private static string ToMetricTypeString(MetricType type)
+        {
+            switch (type)
+            {
+                case MetricType.Gauge: return "gauge";
+                case MetricType.Count: return "count";
+                case MetricType.Rate: return "rate";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
     }
 
     public enum MetricType
     {
-        gauge,
-        count,
-        rate
+        Gauge,
+        Count,
+        Rate
     }
 
 }
