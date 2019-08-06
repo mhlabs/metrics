@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MhLabs.Metrics
 {
-    public class MetricClient
+    public class MetricClient : IMetricClient
     {
         private readonly string _host;
         private readonly string _prefix;

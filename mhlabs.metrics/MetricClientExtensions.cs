@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using MhLabs.Metrics;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace mhlabs.metrics.extensions
+namespace mhlabs.metrics
 {
     public static class MetricClientExtensions
     {
@@ -17,7 +16,7 @@ namespace mhlabs.metrics.extensions
             string prefix = Constants.DefaultPrefix,
             Action<string> output = null, params string[] defaultTags)
         {
-            return serviceCollection.AddSingleton(new MetricClient(host: host, prefix: prefix, output: output, defaultTags: defaultTags));
+            return serviceCollection.AddSingleton<IMetricClient>(new MetricClient(host: host, prefix: prefix, output: output, defaultTags: defaultTags));
         }
     }
 }
