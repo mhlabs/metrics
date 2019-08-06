@@ -11,7 +11,14 @@ namespace MhLabs.Metrics
         private readonly string _defaultTags;
         private readonly Action<string> _output;
 
-        public MetricClient(string host = "mathem.my-service", string prefix = "mathem.metric", Action<string> output = null, List<string> defaultTags = null) 
+        /// <summary>
+        /// Creates an instance of MetricClient
+        /// </summary>
+        /// <param name="host">Mandatory. Assign the metric host or source, e.g 'mathem.my-service'. Will automatically be added as a default tag: 'domain:host'</param>
+        /// <param name="prefix">Add your custom prefix for metrics, e.g 'mathem.metric'</param>
+        /// <param name="output">Metric renderer, are using Console.WriteLine as default</param>
+        /// <param name="defaultTags">List of default tags that will be included in all logs, e.g 'owner:ecom'</param>
+        public MetricClient(string host, string prefix = Constants.DefaultPrefix, Action<string> output = null, List<string> defaultTags = null) 
         {
             _host = host;
             _prefix = prefix;

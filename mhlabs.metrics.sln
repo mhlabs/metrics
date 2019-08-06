@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhlabs.metrics", "mhlabs.metrics\mhlabs.metrics.csproj", "{4F1C681B-0640-41B2-81B2-2B3EFA161646}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mhlabs.metrics", "mhlabs.metrics\mhlabs.metrics.csproj", "{4F1C681B-0640-41B2-81B2-2B3EFA161646}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhlabs.metrics.tests", "mhlabs.metrics.tests\mhlabs.metrics.Test.csproj", "{8C0DB21E-8C9F-4417-B647-731BE7E75CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mhlabs.metrics.Test", "mhlabs.metrics.tests\mhlabs.metrics.Test.csproj", "{8C0DB21E-8C9F-4417-B647-731BE7E75CF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhlabs.metrics.extensions", "mhlabs.metrics.extensions\mhlabs.metrics.extensions.csproj", "{0127F711-7566-406B-8917-1F9BEEB26BD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4F1C681B-0640-41B2-81B2-2B3EFA161646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +43,23 @@ Global
 		{8C0DB21E-8C9F-4417-B647-731BE7E75CF6}.Release|x64.Build.0 = Release|Any CPU
 		{8C0DB21E-8C9F-4417-B647-731BE7E75CF6}.Release|x86.ActiveCfg = Release|Any CPU
 		{8C0DB21E-8C9F-4417-B647-731BE7E75CF6}.Release|x86.Build.0 = Release|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Debug|x64.Build.0 = Debug|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Debug|x86.Build.0 = Debug|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Release|x64.ActiveCfg = Release|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Release|x64.Build.0 = Release|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Release|x86.ActiveCfg = Release|Any CPU
+		{0127F711-7566-406B-8917-1F9BEEB26BD2}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00C34AEC-FF9B-4239-AE0C-B3867BF3C78B}
 	EndGlobalSection
 EndGlobal
